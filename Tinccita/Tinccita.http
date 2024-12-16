@@ -1,0 +1,6 @@
+@Tinccita_HostAddress = http://localhost:5067
+
+GET {{Tinccita_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
