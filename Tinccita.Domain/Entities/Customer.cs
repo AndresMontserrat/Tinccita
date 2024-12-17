@@ -9,6 +9,6 @@ namespace Tinccita.Domain.Entities
         public string? Email { get; set; }
         public string? Prefix { get; set; }
         public string? Phone { get; set; }
-        public ICollection<AppointmentBooked> AppointmentsBooked { get; set; }
+        public ICollection<AppointmentBooked>? AppointmentsBooked { get; set; }
     }
 }
