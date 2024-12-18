@@ -1,34 +1,46 @@
-﻿using Tinccita.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Tinccita.Application.Exceptions;
+using Tinccita.Domain.Interfaces;
+using Tinccita.Infraestructure.Data;
 
 namespace Tinccita.Infraestructure.Repositories
 {
-    public class GenericRepository<TEntity> : IGeneric<TEntity> where TEntity : class
+    public class GenericRepository<TEntity>(AppDbContext context) : IGeneric<TEntity> where TEntity : class
     {
         //TODO: CREATE REPOSITORY BY DOMAIN CLASS
-
-        Task<int> IGeneric<TEntity>.AddAsync(TEntity entity)
+        public async Task<int> AddAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            context.Set<TEntity>().Add(entity);
+            return await context.SaveChangesAsync();
         }
 
-        Task<int> IGeneric<TEntity>.DeleteAsync(Guid id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await context.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                throw new ItemNotFoundException($"Item {typeof(TEntity).Name} with {id} is not found");
+            }
+            context.Set<TEntity>().Remove(entity);
+            return await context.SaveChangesAsync();
         }
 
-        Task<IEnumerable<TEntity>> IGeneric<TEntity>.GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var result = await context.Set<TEntity>().AsNoTracking().ToListAsync();   
+            return result;
         }
 
-        Task<TEntity> IGeneric<TEntity>.GetByIdAsync(int id)
+        public async Task<TEntity>GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await context.Set<TEntity>().FindAsync(id);
+            return result!;
         }
 
-        Task<int> IGeneric<TEntity>.UpdateAsync(TEntity entity)
+        public async Task<int> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            context.Set<TEntity>().Update(entity);
+            return await context.SaveChangesAsync();
         }
     }
 }
