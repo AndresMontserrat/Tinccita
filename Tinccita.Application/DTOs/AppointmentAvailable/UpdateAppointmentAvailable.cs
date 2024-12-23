@@ -3,5 +3,5 @@
     public class UpdateAppointmentAvailable : AppointmentAvailableBase 
     { 
         public Guid Id { get; set; }
-    } 
+    }
 }
