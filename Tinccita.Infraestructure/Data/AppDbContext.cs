@@ -3,7 +3,7 @@ using Tinccita.Domain.Entities;
 
 namespace Tinccita.Infraestructure.Data
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
         public DbSet<AppointmentAvailable> AppointmentsAvailable { get; set; }
         public DbSet<AppointmentBooked> AppointmentsBooked { get; set; }
@@ -12,5 +12,13 @@ namespace Tinccita.Infraestructure.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=D:\\BBDD\\Tinccita\\castello.db");
+            }
+        }
     }
 }

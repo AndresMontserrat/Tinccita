@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tinccita.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace Tinccita.Domain.Entities
         public Guid Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public Guid? SubcategoryId { get; set; }
         public Subcategory? Subcategory { get; set; }

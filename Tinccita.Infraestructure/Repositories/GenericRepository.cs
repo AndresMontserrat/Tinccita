@@ -5,7 +5,7 @@ using Tinccita.Infraestructure.Data;
 
 namespace Tinccita.Infraestructure.Repositories
 {
-    public class GenericRepository<TEntity>(AppDbContext context) : IGeneric<TEntity> where TEntity : class
+    public class GenericRepository<TEntity>(ApplicationDbContext context) : IGeneric<TEntity> where TEntity : class
     {
         //TODO: CREATE REPOSITORY BY DOMAIN CLASS
         public async Task<int> AddAsync(TEntity entity)

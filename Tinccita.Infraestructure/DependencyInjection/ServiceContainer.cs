@@ -13,9 +13,9 @@ namespace Tinccita.Infraestructure.DependencyInjection
         public static IServiceCollection AddInfraestructureService
             (this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = "Default";
-            services.AddDbContext<AppDbContext>(option =>
-            option.UseSqlite(config.GetConnectionString(connectionString),
+            string connectionString_CS = "Tinccita_cs";
+            services.AddDbContext<ApplicationDbContext>(option =>
+            option.UseSqlite(config.GetConnectionString(connectionString_CS),
             sqlOptions =>
             {
                 sqlOptions.MigrationsAssembly(typeof(ServiceContainer).Assembly.FullName);
