@@ -39,7 +39,7 @@ namespace Tinccita.Application.Services.Implementations
             return mapper.Map<IEnumerable<GetSubcategory>>(rawData);
         }
 
-        public async Task<GetSubcategory> GetByIdAsync(int id)
+        public async Task<GetSubcategory> GetByIdAsync(Guid id)
         {
             var rawData = await subcategoryInterface.GetByIdAsync(id);
             if (rawData == null) return new GetSubcategory();

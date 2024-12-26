@@ -38,7 +38,7 @@ namespace Tinccita.Application.Services.Implementations
             return mapper.Map<IEnumerable<GetBusiness>>(rawData);
         }
 
-        public async Task<GetBusiness> GetByIdAsync(int id)
+        public async Task<GetBusiness> GetByIdAsync(Guid id)
         {
             var rawData = await businessInterface.GetByIdAsync(id);
             if (rawData == null) return new GetBusiness();

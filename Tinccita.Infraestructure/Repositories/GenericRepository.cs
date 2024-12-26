@@ -31,7 +31,7 @@ namespace Tinccita.Infraestructure.Repositories
             return result;
         }
 
-        public async Task<TEntity>GetByIdAsync(int id)
+        public async Task<TEntity>GetByIdAsync(Guid id)
         {
             var result = await context.Set<TEntity>().FindAsync(id);
             return result!;

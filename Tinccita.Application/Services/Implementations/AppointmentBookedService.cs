@@ -38,7 +38,7 @@ namespace Tinccita.Application.Services.Implementations
             return mapper.Map<IEnumerable<GetAppointmentBooked>>(rawData);
         }
 
-        public async Task<GetAppointmentBooked> GetByIdAsync(int id)
+        public async Task<GetAppointmentBooked> GetByIdAsync(Guid id)
         {
             var rawData = await appointmentBookedInterface.GetByIdAsync(id);
             if (rawData == null) return new GetAppointmentBooked();

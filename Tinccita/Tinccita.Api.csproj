@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tinccita.Application\Tinccita.Application.csproj" />
     <ProjectReference Include="..\Tinccita.Domain\Tinccita.Domain.csproj" />
     <ProjectReference Include="..\Tinccita.Infraestructure\Tinccita.Infraestructure.csproj" />
   </ItemGroup>

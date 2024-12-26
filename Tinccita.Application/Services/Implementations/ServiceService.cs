@@ -38,7 +38,7 @@ namespace Tinccita.Application.Services.Implementations
             return mapper.Map<IEnumerable<GetService>>(rawData);
         }
 
-        public async Task<GetService> GetByIdAsync(int id)
+        public async Task<GetService> GetByIdAsync(Guid id)
         {
             var rawData = await serviceInterface.GetByIdAsync(id);
             if (rawData == null) return new GetService();

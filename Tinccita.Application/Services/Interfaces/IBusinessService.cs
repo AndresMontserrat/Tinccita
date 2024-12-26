@@ -6,7 +6,7 @@ namespace Tinccita.Application.Services.Interfaces
     public interface IBusinessService
     {
         Task<IEnumerable<GetBusiness>> GetAllAsync();
-        Task<GetBusiness> GetByIdAsync(int id);
+        Task<GetBusiness> GetByIdAsync(Guid id);
         Task<ServiceResponse> AddAsync(CreateBusiness business);
         Task<ServiceResponse> UpdateAsync(UpdateBusiness business);
         Task<ServiceResponse> DeleteAsync(Guid id);
