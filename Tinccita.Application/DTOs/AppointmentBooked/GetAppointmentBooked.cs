@@ -1,4 +1,5 @@
-﻿using Tinccita.Application.DTOs.Customer;
+﻿using Tinccita.Application.DTOs.AppointmentBookedCustomer;
+using Tinccita.Application.DTOs.Customer;
 using Tinccita.Application.DTOs.Service;
 
 namespace Tinccita.Application.DTOs.AppointmentBooked
@@ -7,6 +8,6 @@ namespace Tinccita.Application.DTOs.AppointmentBooked
     {
         public Guid Id { get; set; }
         public GetService? Service { get; set; }
-        public ICollection<GetCustomer>? Customers { get; set; }
+        public ICollection<GetAppointmentBookedCustomer>? Customers { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace Tinccita.Infraestructure.Data
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
         public DbSet<AppointmentAvailable> AppointmentsAvailable { get; set; }
+        public DbSet<AppointmentBookedCustomer> AppointmentsBookedCustomers { get; set; }
         public DbSet<AppointmentBooked> AppointmentsBooked { get; set; }
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -19,6 +20,11 @@ namespace Tinccita.Infraestructure.Data
             {
                 optionsBuilder.UseSqlite("Data Source=D:\\BBDD\\Tinccita\\castello.db");
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppointmentBookedCustomer>().HasKey(c => new { c.AppointmentBookedId, c.CustomerGuid });
         }
     }
 }

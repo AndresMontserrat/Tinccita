@@ -23,6 +23,7 @@ namespace Tinccita.Infraestructure.DependencyInjection
             ServiceLifetime.Scoped);
 
             services.AddScoped<IGeneric<AppointmentAvailable>, GenericRepository<AppointmentAvailable>>();
+            services.AddScoped<IGeneric<AppointmentBookedCustomer>, GenericRepository<AppointmentBookedCustomer>>();
             services.AddScoped<IGeneric<AppointmentBooked>, GenericRepository<AppointmentBooked>>();
             services.AddScoped<IGeneric<Business>, GenericRepository<Business>>();
             services.AddScoped<IGeneric<Category>, GenericRepository<Category>>();

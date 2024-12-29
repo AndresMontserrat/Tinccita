@@ -8,6 +8,7 @@ namespace Tinccita.Application.DTOs.Service
         public string? Description { get; set; }
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+        public int? Minutes { get; set; }
         public Guid? SubcategoryId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Tinccita.Application.DTOs.AppointmentAvailable;
 using Tinccita.Application.DTOs.AppointmentBooked;
+using Tinccita.Application.DTOs.AppointmentBookedCustomer;
 using Tinccita.Application.DTOs.Business;
 using Tinccita.Application.DTOs.Category;
 using Tinccita.Application.DTOs.Customer;
@@ -15,6 +16,7 @@ namespace Tinccita.Application.Mapping
         public MappingConfig() 
         {
             CreateMap<CreateAppointmentAvailable, AppointmentAvailable>();
+            CreateMap<CreateAppointmentBookedCustomer, AppointmentBookedCustomer>();
             CreateMap<CreateAppointmentBooked, AppointmentBooked>();
             CreateMap<CreateBusiness, Business>();
             CreateMap<CreateCategory, Category>();
@@ -23,6 +25,7 @@ namespace Tinccita.Application.Mapping
             CreateMap<CreateSubcategory, Subcategory>();
 
             CreateMap<AppointmentAvailable, GetAppointmentAvailable>();
+            CreateMap<AppointmentBookedCustomer, GetAppointmentBookedCustomer>();
             CreateMap<AppointmentBooked, GetAppointmentBooked>();
             CreateMap<Business, GetBusiness>();
             CreateMap<Category, GetCategory>();

@@ -7,7 +7,8 @@ namespace Tinccita.Domain.Entities
         [Key]
         public Guid Id { get; set; }
         public DateOnly Date { get; set; }
-        public TimeOnly Time { get; set; }
+        public TimeOnly Time_Start { get; set; }
+        public TimeOnly Time_End { get; set; }
         public Guid? ServiceId { get; set; }
         public Service? Service { get; set; }
     }
