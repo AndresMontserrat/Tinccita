@@ -29,7 +29,6 @@ namespace Tinccita.Infraestructure.Repositories
             context.Set<AppointmentAvailable>().Remove(entity);
             return await context.SaveChangesAsync();
         }
-
         public async Task<int> UpdateAsync(AppointmentAvailable entity)
         {
             context.Set<AppointmentAvailable>().Update(entity);

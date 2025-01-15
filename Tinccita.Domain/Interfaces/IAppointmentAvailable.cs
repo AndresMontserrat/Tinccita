@@ -7,6 +7,6 @@ namespace Tinccita.Domain.Interfaces
         Task<int> AddAsync(AppointmentAvailable entity);
         Task<int> UpdateAsync(AppointmentAvailable entity);
         Task<int> DeleteAsync(Guid id);
-        Task<List<Entities.AppointmentAvailable>> GetAllByService(Guid id);
+        Task<List<AppointmentAvailable>> GetAllByService(Guid id);
     }
 }

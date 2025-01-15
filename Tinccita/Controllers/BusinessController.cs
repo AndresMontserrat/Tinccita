@@ -8,16 +8,16 @@ namespace Tinccita.Api.Controllers
     [ApiController]
     public class BusinessController(IBusinessService businessService) : ControllerBase
     {
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await businessService.GetAllAsync();
-            return data.Any() ? Ok(data) : NotFound();
-        }
         [HttpGet("single/{id}")]
         public async Task<IActionResult> GetSingle(Guid id)
         {
             var data = await businessService.GetByIdAsync(id);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find/{name}")]
+        public async Task<IActionResult> Find(string name)
+        {
+            var data = await businessService.GetByNameAsync(name);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]

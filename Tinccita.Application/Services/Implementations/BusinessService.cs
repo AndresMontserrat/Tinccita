@@ -7,11 +7,12 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class BusinessService(IGeneric<Business> businessInterface, IMapper mapper) : IBusinessService
+    public class BusinessService(IBusiness businessInterface, IMapper mapper) : IBusinessService
     {
         public async Task<ServiceResponse> AddAsync(CreateBusiness business)
         {
             var mappedData = mapper.Map<Business>(business);
+            mappedData.Id = Guid.NewGuid();
             int result = await businessInterface.AddAsync(mappedData);
             if (result > 0)
             {
@@ -19,7 +20,6 @@ namespace Tinccita.Application.Services.Implementations
             }
             return new ServiceResponse(false, "Business not found");
         }
-
         public async Task<ServiceResponse> DeleteAsync(Guid id)
         {
             int result = await businessInterface.DeleteAsync(id);
@@ -29,15 +29,6 @@ namespace Tinccita.Application.Services.Implementations
             }
             return new ServiceResponse(false, "Business not found");
         }
-
-        public async Task<IEnumerable<GetBusiness>> GetAllAsync()
-        {
-            var rawData = await businessInterface.GetAllAsync();
-            if (!rawData.Any()) return [];
-
-            return mapper.Map<IEnumerable<GetBusiness>>(rawData);
-        }
-
         public async Task<GetBusiness> GetByIdAsync(Guid id)
         {
             var rawData = await businessInterface.GetByIdAsync(id);
@@ -45,7 +36,13 @@ namespace Tinccita.Application.Services.Implementations
 
             return mapper.Map<GetBusiness>(rawData);
         }
+        public async Task<GetBusiness> GetByNameAsync(string name)
+        {
+            var rawData = await businessInterface.GetByNameAsync(name);
+            if (rawData == null) return new GetBusiness();
 
+            return mapper.Map<GetBusiness>(rawData);
+        }
         public async Task<ServiceResponse> UpdateAsync(UpdateBusiness business)
         {
             var mappedData = mapper.Map<Business>(business);
