@@ -2,7 +2,6 @@
 {
     public interface IGeneric<TEntity> where TEntity : class
     {
-        //TODO: CREATE INTERFACE BY DOMAIN CLASS
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(Guid id);
         Task<int> AddAsync(TEntity entity);

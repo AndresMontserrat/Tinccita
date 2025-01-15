@@ -11,6 +11,7 @@ namespace Tinccita.Application.DependencyInjection
         {
             services.AddAutoMapper(typeof(MappingConfig));
             services.AddScoped<IAppointmentAvailableService, AppointmentAvailableService>();
+            services.AddScoped<IAppointmentBookedCustomerService, AppointmentBookedCustomerService>();
             services.AddScoped<IAppointmentBookedService, AppointmentBookedService>();
             services.AddScoped<IBusinessService, BusinessService>();
             services.AddScoped<ICategoryService, CategoryService>();

@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Tinccita.Domain.Interfaces;
 using Tinccita.Infraestructure.Repositories;
 using Tinccita.Domain.Entities;
+using Tinccita.Application.Services.Implementations;
+using Tinccita.Application.Services.Interfaces;
 
 namespace Tinccita.Infraestructure.DependencyInjection
 {
@@ -22,7 +24,7 @@ namespace Tinccita.Infraestructure.DependencyInjection
             }),
             ServiceLifetime.Scoped);
 
-            services.AddScoped<IGeneric<AppointmentAvailable>, GenericRepository<AppointmentAvailable>>();
+            services.AddScoped<IAppointmentAvailable, AppointmentAvailableRepository>();
             services.AddScoped<IGeneric<AppointmentBookedCustomer>, GenericRepository<AppointmentBookedCustomer>>();
             services.AddScoped<IGeneric<AppointmentBooked>, GenericRepository<AppointmentBooked>>();
             services.AddScoped<IGeneric<Business>, GenericRepository<Business>>();
