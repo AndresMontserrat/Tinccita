@@ -21,13 +21,13 @@ namespace Tinccita.Api.Controllers
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(CreateSubcategory subcategory)
+        public async Task<IActionResult> Add([FromBody] CreateSubcategory subcategory)
         {
             var result = await subcategoryService.AddAsync(subcategory);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateSubcategory subcategory)
+        public async Task<IActionResult> Update([FromBody] UpdateSubcategory subcategory)
         {
             var result = await subcategoryService.UpdateAsync(subcategory);
             return result.Success ? Ok(result) : BadRequest(result);

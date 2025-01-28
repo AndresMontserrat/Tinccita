@@ -21,13 +21,13 @@ namespace Tinccita.Api.Controllers
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(CreateCustomer customer)
+        public async Task<IActionResult> Add([FromBody] CreateCustomer customer)
         {
             var result = await customerService.AddAsync(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateCustomer customer)
+        public async Task<IActionResult> Update([FromBody] UpdateCustomer customer)
         {
             var result = await customerService.UpdateAsync(customer);
             return result.Success ? Ok(result) : BadRequest(result);

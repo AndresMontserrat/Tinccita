@@ -20,14 +20,26 @@ namespace Tinccita.Api.Controllers
             var data = await categoryService.GetByIdAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
+        [HttpGet("find/{name}")]
+        public async Task<IActionResult> Find(string name)
+        {
+            var data = await categoryService.GetByNameAsync(name);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-business/{id}")]
+        public async Task<IActionResult> FindByBusiness(Guid id)
+        {
+            var data = await categoryService.GetAllByBusinessAsync(id);
+            return data != null ? Ok(data) : NotFound();
+        }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(CreateCategory category)
+        public async Task<IActionResult> Add([FromBody] CreateCategory category)
         {
             var result = await categoryService.AddAsync(category);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateCategory category)
+        public async Task<IActionResult> Update([FromBody] UpdateCategory category)
         {
             var result = await categoryService.UpdateAsync(category);
             return result.Success ? Ok(result) : BadRequest(result);
