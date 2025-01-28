@@ -8,8 +8,6 @@ namespace Tinccita.Infraestructure.Repositories
 {
     public class CategoryRepository(ApplicationDbContext context) : ICategory
     {
-        private readonly ApplicationDbContext _context;
-
         public async Task<int> AddAsync(Category entity)
         {
             context.Set<Category>().Add(entity);
@@ -32,7 +30,7 @@ namespace Tinccita.Infraestructure.Repositories
         }
         public async Task<Category?> GetByIdAsync(Guid id)
         {
-            var result = await _context.Categories.FindAsync(id);
+            var result = await context.Categories.FindAsync(id);
             return result!;
         }
         public async Task<Category?> GetByNameAsync(string name)
@@ -41,17 +39,17 @@ namespace Tinccita.Infraestructure.Repositories
             {
                 return null;
             }
-            var result = await _context.Categories.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
+            var result = await context.Categories.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
             return result!;
         }
-        public async Task<List<Category>> GetByBusinessAsync(Guid businessId)
+        public async Task<IEnumerable<Category>> GetByBusinessAsync(Guid businessId)
         {
-            var result = await _context.Categories.Where(x => x.BusinessId.HasValue.Equals(businessId)).ToListAsync();
+            var result = await context.Categories.Where(x => x.BusinessId.HasValue.Equals(businessId)).ToListAsync();
             return result!;
         }
-        public async Task<List<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            var result = await _context.Categories.ToListAsync();
+            var result = await context.Categories.ToListAsync();
             return result!;
         }
     }

@@ -8,10 +8,9 @@ namespace Tinccita.Infraestructure.Repositories
 {
     public class AppointmentAvailableRepository(ApplicationDbContext context) : IAppointmentAvailable
     {
-        private readonly ApplicationDbContext _context;
-        public async Task<List<AppointmentAvailable>> GetAllByService(Guid id)
+        public async Task<IEnumerable<AppointmentAvailable>> GetAllByService(Guid id)
         {
-            var result = await _context.AppointmentsAvailable.Where(x => x.ServiceId == id).ToListAsync();
+            var result = await context.AppointmentsAvailable.Where(x => x.ServiceId == id).ToListAsync();
             return result;
         }
         public async Task<int> AddAsync(AppointmentAvailable entity)

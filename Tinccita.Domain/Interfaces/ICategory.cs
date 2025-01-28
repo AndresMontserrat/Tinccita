@@ -6,8 +6,8 @@ namespace Tinccita.Domain.Interfaces
     {
         Task<int> AddAsync(Category entity);
         Task<int> DeleteAsync(Guid id);
-        Task<List<Category>> GetAllAsync();
-        Task<List<Category>> GetByBusinessAsync(Guid businessId);
+        Task<IEnumerable<Category>> GetAllAsync();
+        Task<IEnumerable<Category>> GetByBusinessAsync(Guid businessId);
         Task<Category?> GetByIdAsync(Guid id);
         Task<Category?> GetByNameAsync(string name);
         Task<int> UpdateAsync(Category entity);

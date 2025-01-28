@@ -8,8 +8,6 @@ namespace Tinccita.Infraestructure.Repositories
 {
     public class BusinessRepository(ApplicationDbContext context) : IBusiness
     {
-        private readonly ApplicationDbContext _context;
-
         public async Task<int> AddAsync(Business entity)
         {
             context.Set<Business>().Add(entity);
@@ -32,7 +30,7 @@ namespace Tinccita.Infraestructure.Repositories
         }
         public async Task<Business?> GetByIdAsync(Guid id)
         {
-            var result = await _context.Businesses.FindAsync(id);
+            var result = await context.Businesses.FindAsync(id);
             return result!;
         }
         public async Task<Business?> GetByNameAsync(string name)
@@ -41,7 +39,7 @@ namespace Tinccita.Infraestructure.Repositories
             {
                 return null;
             }
-            var result = await _context.Businesses.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
+            var result = await context.Businesses.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
             return result!;
         }
     }

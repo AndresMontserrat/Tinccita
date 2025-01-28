@@ -20,6 +20,18 @@ namespace Tinccita.Api.Controllers
             var data = await subcategoryService.GetByIdAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
+        [HttpGet("find/{name}")]
+        public async Task<IActionResult> FindByName(string name)
+        {
+            var data = await subcategoryService.GetByNameAsync(name);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-category/{id}")]
+        public async Task<IActionResult> FindByCategory(Guid id)
+        {
+            var data = await subcategoryService.GetAllByCategoryAsync(id);
+            return data != null ? Ok(data) : NotFound();
+        }
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] CreateSubcategory subcategory)
         {
