@@ -2,6 +2,9 @@
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// The recipient of a service
+    /// </summary>
     public class Customer
     {
         [Key]

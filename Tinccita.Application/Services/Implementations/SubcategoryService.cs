@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Tinccita.Application.DTOs;
-using Tinccita.Application.DTOs.Category;
 using Tinccita.Application.DTOs.Subcategory;
 using Tinccita.Application.Services.Interfaces;
 using Tinccita.Domain.Entities;
@@ -54,7 +53,7 @@ namespace Tinccita.Application.Services.Implementations
 
             return mapper.Map<IEnumerable<GetSubcategory>>(rawData);
         }
-        
+
         public async Task<GetSubcategory> GetByNameAsync(string name)
         {
             var rawData = await subcategoryInterface.GetByNameAsync(name);

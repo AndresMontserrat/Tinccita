@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// Relationship between appointment booked and customer(s) 
+    /// </summary>
     public class AppointmentBookedCustomer
     {
         [Key]

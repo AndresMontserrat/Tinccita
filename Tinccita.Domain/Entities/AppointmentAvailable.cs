@@ -2,6 +2,9 @@
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// Slots available for appointments for services
+    /// </summary>
     public class AppointmentAvailable
     {
         [Key]

@@ -7,7 +7,7 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class CustomerService(IGeneric<Customer> customerInterface, IMapper mapper) : ICustomerService
+    public class CustomerService(ICustomer customerInterface, IMapper mapper) : ICustomerService
     {
         public async Task<ServiceResponse> AddAsync(CreateCustomer customer)
         {
@@ -30,17 +30,17 @@ namespace Tinccita.Application.Services.Implementations
             return new ServiceResponse(false, "Customer not found");
         }
 
-        public async Task<IEnumerable<GetCustomer>> GetAllAsync()
-        {
-            var rawData = await customerInterface.GetAllAsync();
-            if (!rawData.Any()) return [];
-
-            return mapper.Map<IEnumerable<GetCustomer>>(rawData);
-        }
-
         public async Task<GetCustomer> GetByIdAsync(Guid id)
         {
             var rawData = await customerInterface.GetByIdAsync(id);
+            if (rawData == null) return new GetCustomer();
+
+            return mapper.Map<GetCustomer>(rawData);
+        }
+
+        public async Task<GetCustomer> GetByEmailAsync(string email)
+        {
+            var rawData = await customerInterface.GetByEmailAsync(email);
             if (rawData == null) return new GetCustomer();
 
             return mapper.Map<GetCustomer>(rawData);

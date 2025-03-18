@@ -1,9 +1,9 @@
-﻿using Tinccita.Application.DTOs;
+﻿using AutoMapper;
+using Tinccita.Application.DTOs;
+using Tinccita.Application.DTOs.AppointmentBookedCustomer;
 using Tinccita.Application.Services.Interfaces;
 using Tinccita.Domain.Entities;
 using Tinccita.Domain.Interfaces;
-using AutoMapper;
-using Tinccita.Application.DTOs.AppointmentBookedCustomer;
 
 namespace Tinccita.Application.Services.Implementations
 {

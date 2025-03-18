@@ -13,7 +13,7 @@ namespace Tinccita.Application.Mapping
 {
     public class MappingConfig : Profile
     {
-        public MappingConfig() 
+        public MappingConfig()
         {
             CreateMap<CreateAppointmentAvailable, AppointmentAvailable>();
             CreateMap<CreateAppointmentBookedCustomer, AppointmentBookedCustomer>();

@@ -8,16 +8,16 @@ namespace Tinccita.Api.Controllers
     [ApiController]
     public class CustomerService(ICustomerService customerService) : ControllerBase
     {
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await customerService.GetAllAsync();
-            return data.Any() ? Ok(data) : NotFound();
-        }
         [HttpGet("single/{id}")]
         public async Task<IActionResult> GetSingle(Guid id)
         {
             var data = await customerService.GetByIdAsync(id);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find/{id}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            var data = await customerService.GetByEmailAsync(email);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]

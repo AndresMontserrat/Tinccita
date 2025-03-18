@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// A single service provided to customer(s)
+    /// </summary>
     public class Service
     {
         [Key]

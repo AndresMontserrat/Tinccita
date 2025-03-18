@@ -2,6 +2,9 @@
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// Slots booked by customers for appointments for services
+    /// </summary>
     public class AppointmentBooked
     {
         [Key]

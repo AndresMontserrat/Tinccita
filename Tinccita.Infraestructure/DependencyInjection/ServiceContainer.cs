@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tinccita.Infraestructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Tinccita.Domain.Interfaces;
-using Tinccita.Infraestructure.Repositories;
 using Tinccita.Domain.Entities;
-using Tinccita.Application.Services.Implementations;
-using Tinccita.Application.Services.Interfaces;
+using Tinccita.Domain.Interfaces;
+using Tinccita.Infraestructure.Data;
+using Tinccita.Infraestructure.Repositories;
 
 namespace Tinccita.Infraestructure.DependencyInjection
 {
@@ -32,7 +30,7 @@ namespace Tinccita.Infraestructure.DependencyInjection
             services.AddScoped<IGeneric<Customer>, GenericRepository<Customer>>();
             services.AddScoped<IGeneric<Service>, GenericRepository<Service>>();
             services.AddScoped<IGeneric<Subcategory>, GenericRepository<Subcategory>>();
-            
+
             return services;
         }
     }
