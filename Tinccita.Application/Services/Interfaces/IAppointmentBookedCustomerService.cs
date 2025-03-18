@@ -5,10 +5,10 @@ namespace Tinccita.Application.Services.Interfaces
 {
     public interface IAppointmentBookedCustomerService
     {
-        Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllAsync();
-        Task<GetAppointmentBookedCustomer> GetByIdAsync(Guid id);
         Task<ServiceResponse> AddAsync(CreateAppointmentBookedCustomer appointmentAvailable);
         Task<ServiceResponse> UpdateAsync(UpdateAppointmentBookedCustomer appointmentAvailable);
         Task<ServiceResponse> DeleteAsync(Guid id);
+        Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllByAppointmentAsync(Guid id);
+        Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllByCustomerAsync(Guid id);
     }
 }

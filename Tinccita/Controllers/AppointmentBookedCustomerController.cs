@@ -8,16 +8,16 @@ namespace Tinccita.Api.Controllers
     [ApiController]
     public class AppointmentBookedCustomerController(IAppointmentBookedCustomerService appointmentBookedCustomerService) : ControllerBase
     {
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("find-by-appointment/{id}")]
+        public async Task<IActionResult> GetByAppointment(Guid id)
         {
-            var data = await appointmentBookedCustomerService.GetAllAsync();
+            var data = await appointmentBookedCustomerService.GetAllByAppointmentAsync(id);
             return data.Any() ? Ok(data) : NotFound();
         }
-        [HttpGet("single/{id}")]
-        public async Task<IActionResult> GetSingle(Guid id)
+        [HttpGet("find-by-customer/{id}")]
+        public async Task<IActionResult> GetByCustomer(Guid id)
         {
-            var data = await appointmentBookedCustomerService.GetByIdAsync(id);
+            var data = await appointmentBookedCustomerService.GetAllByCustomerAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]

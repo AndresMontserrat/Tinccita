@@ -7,7 +7,7 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class AppointmentBookedCustomerService(IGeneric<AppointmentBookedCustomer> appointmentBookedCustomerInterface, IMapper mapper) : IAppointmentBookedCustomerService
+    public class AppointmentBookedCustomerService(IAppointmentBookedCustomer appointmentBookedCustomerInterface, IMapper mapper) : IAppointmentBookedCustomerService
 
     {
         public async Task<ServiceResponse> AddAsync(CreateAppointmentBookedCustomer appointmentBookedCustomer)
@@ -31,20 +31,19 @@ namespace Tinccita.Application.Services.Implementations
             return new ServiceResponse(false, "Appointment not found");
         }
 
-        public async Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllAsync()
+        public async Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllByAppointmentAsync(Guid id)
         {
-            var rawData = await appointmentBookedCustomerInterface.GetAllAsync();
+            var rawData = await appointmentBookedCustomerInterface.GetAllByAppointment(id);
             if (!rawData.Any()) return [];
 
             return mapper.Map<IEnumerable<GetAppointmentBookedCustomer>>(rawData);
         }
-
-        public async Task<GetAppointmentBookedCustomer> GetByIdAsync(Guid id)
+        public async Task<IEnumerable<GetAppointmentBookedCustomer>> GetAllByCustomerAsync(Guid id)
         {
-            var rawData = await appointmentBookedCustomerInterface.GetByIdAsync(id);
-            if (rawData == null) return new GetAppointmentBookedCustomer();
+            var rawData = await appointmentBookedCustomerInterface.GetAllByCustomer(id);
+            if (!rawData.Any()) return [];
 
-            return mapper.Map<GetAppointmentBookedCustomer>(rawData);
+            return mapper.Map<IEnumerable<GetAppointmentBookedCustomer>>(rawData);
         }
 
         public async Task<ServiceResponse> UpdateAsync(UpdateAppointmentBookedCustomer appointmentBookedCustomer)
