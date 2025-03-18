@@ -7,11 +7,12 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class AppointmentAvailableService(IGeneric<AppointmentAvailable> appointmentAvailableInterface, IMapper mapper) : IAppointmentAvailableService
+    public class AppointmentAvailableService(IAppointmentAvailable appointmentAvailableInterface, IMapper mapper) : IAppointmentAvailableService
     {
         public async Task<ServiceResponse> AddAsync(CreateAppointmentAvailable appointmentAvailable)
         {
             var mappedData = mapper.Map<AppointmentAvailable>(appointmentAvailable);
+            mappedData.Id = Guid.NewGuid();
             int result = await appointmentAvailableInterface.AddAsync(mappedData);
             if (result > 0)
             {
@@ -30,20 +31,12 @@ namespace Tinccita.Application.Services.Implementations
             return new ServiceResponse(false, "Appointment not found");
         }
 
-        public async Task<IEnumerable<GetAppointmentAvailable>> GetAllAsync()
+        public async Task<IEnumerable<GetAppointmentAvailable>> GetAllByService(Guid id)
         {
-            var rawData = await appointmentAvailableInterface.GetAllAsync();
+            var rawData = await appointmentAvailableInterface.GetAllByService(id);
             if (!rawData.Any()) return [];
 
             return mapper.Map<IEnumerable<GetAppointmentAvailable>>(rawData);
-        }
-
-        public async Task<GetAppointmentAvailable> GetByIdAsync(Guid id)
-        {
-            var rawData = await appointmentAvailableInterface.GetByIdAsync(id);
-            if (rawData == null) return new GetAppointmentAvailable();
-
-            return mapper.Map<GetAppointmentAvailable>(rawData);
         }
 
         public async Task<ServiceResponse> UpdateAsync(UpdateAppointmentAvailable appointmentAvailable)

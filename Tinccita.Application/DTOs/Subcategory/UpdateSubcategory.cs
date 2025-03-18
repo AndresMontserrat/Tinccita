@@ -2,7 +2,7 @@
 
 namespace Tinccita.Application.DTOs.Subcategory
 {
-    public class UpdateSubcategory : SubcategoryBase 
+    public class UpdateSubcategory : SubcategoryBase
     {
         [Required]
         public Guid Id { get; set; }

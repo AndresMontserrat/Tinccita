@@ -4,7 +4,3 @@ GET {{Tinccita_HostAddress}}/api/business/all
 Accept: application/json
 
 ###
-DELETE {{Tinccita_HostAddress}}/api/business/delete/3ca9b464-f3f7-4281-a42f-407d167031d2
-Accept: application/json
-
-###

@@ -7,7 +7,7 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class CategoryService(IGeneric<Category> categoryInterface, IMapper mapper) : ICategoryService
+    public class CategoryService(ICategory categoryInterface, IMapper mapper) : ICategoryService
     {
         public async Task<ServiceResponse> AddAsync(CreateCategory category)
         {
@@ -38,9 +38,25 @@ namespace Tinccita.Application.Services.Implementations
             return mapper.Map<IEnumerable<GetCategory>>(rawData);
         }
 
+        public async Task<IEnumerable<GetCategory>> GetAllByBusinessAsync(Guid id)
+        {
+            var rawData = await categoryInterface.GetByBusinessAsync(id);
+            if (!rawData.Any()) return [];
+
+            return mapper.Map<IEnumerable<GetCategory>>(rawData);
+        }
+
         public async Task<GetCategory> GetByIdAsync(Guid id)
         {
             var rawData = await categoryInterface.GetByIdAsync(id);
+            if (rawData == null) return new GetCategory();
+
+            return mapper.Map<GetCategory>(rawData);
+        }
+
+        public async Task<GetCategory> GetByNameAsync(string name)
+        {
+            var rawData = await categoryInterface.GetByNameAsync(name);
             if (rawData == null) return new GetCategory();
 
             return mapper.Map<GetCategory>(rawData);

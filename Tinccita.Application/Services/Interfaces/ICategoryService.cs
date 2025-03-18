@@ -10,5 +10,7 @@ namespace Tinccita.Application.Services.Interfaces
         Task<ServiceResponse> AddAsync(CreateCategory category);
         Task<ServiceResponse> UpdateAsync(UpdateCategory category);
         Task<ServiceResponse> DeleteAsync(Guid id);
+        Task<GetCategory> GetByNameAsync(string name);
+        Task<IEnumerable<GetCategory>> GetAllByBusinessAsync(Guid id);
     }
 }

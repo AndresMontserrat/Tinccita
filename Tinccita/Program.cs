@@ -1,5 +1,5 @@
-using Tinccita.Infraestructure.Data;
 using Tinccita.Application.DependencyInjection;
+using Tinccita.Infraestructure.Data;
 using Tinccita.Infraestructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);

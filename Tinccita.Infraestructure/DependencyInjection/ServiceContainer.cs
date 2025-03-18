@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tinccita.Infraestructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Tinccita.Domain.Interfaces;
-using Tinccita.Infraestructure.Repositories;
 using Tinccita.Domain.Entities;
+using Tinccita.Domain.Interfaces;
+using Tinccita.Infraestructure.Data;
+using Tinccita.Infraestructure.Repositories;
 
 namespace Tinccita.Infraestructure.DependencyInjection
 {
@@ -22,14 +22,15 @@ namespace Tinccita.Infraestructure.DependencyInjection
             }),
             ServiceLifetime.Scoped);
 
-            services.AddScoped<IGeneric<AppointmentAvailable>, GenericRepository<AppointmentAvailable>>();
-            services.AddScoped<IGeneric<AppointmentBooked>, GenericRepository<AppointmentBooked>>();
-            services.AddScoped<IGeneric<Business>, GenericRepository<Business>>();
-            services.AddScoped<IGeneric<Category>, GenericRepository<Category>>();
-            services.AddScoped<IGeneric<Customer>, GenericRepository<Customer>>();
-            services.AddScoped<IGeneric<Service>, GenericRepository<Service>>();
-            services.AddScoped<IGeneric<Subcategory>, GenericRepository<Subcategory>>();
-            
+            services.AddScoped<IAppointmentAvailable, AppointmentAvailableRepository>();
+            services.AddScoped<IAppointmentBooked, AppointmentBookedRepository>();
+            services.AddScoped<IAppointmentBookedCustomer, AppointmentBookedCustomerRepository>();
+            services.AddScoped<IBusiness, BusinessRepository>();
+            services.AddScoped<ICategory, CategoryRepository>();
+            services.AddScoped<ICustomer, CustomerRepository>();
+            services.AddScoped<IService, ServiceRepository>();
+            services.AddScoped<ISubcategory, SubcategoryRepository>();
+
             return services;
         }
     }

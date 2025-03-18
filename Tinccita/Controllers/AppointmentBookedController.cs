@@ -8,26 +8,20 @@ namespace Tinccita.Api.Controllers
     [ApiController]
     public class AppointmentBookedController(IAppointmentBookedService appointmentBookedService) : ControllerBase
     {
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("find-by-service/{service}")]
+        public async Task<IActionResult> GetByService(Guid id)
         {
-            var data = await appointmentBookedService.GetAllAsync();
-            return data.Any() ? Ok(data) : NotFound();
-        }
-        [HttpGet("single/{id}")]
-        public async Task<IActionResult> GetSingle(Guid id)
-        {
-            var data = await appointmentBookedService.GetByIdAsync(id);
+            var data = await appointmentBookedService.GetAllByServiceAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(CreateAppointmentBooked appointmentAvailable)
+        public async Task<IActionResult> Add([FromBody] CreateAppointmentBooked appointmentAvailable)
         {
             var result = await appointmentBookedService.AddAsync(appointmentAvailable);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateAppointmentBooked appointmentAvailable)
+        public async Task<IActionResult> Update([FromBody] UpdateAppointmentBooked appointmentAvailable)
         {
             var result = await appointmentBookedService.UpdateAsync(appointmentAvailable);
             return result.Success ? Ok(result) : BadRequest(result);

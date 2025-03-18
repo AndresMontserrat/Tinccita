@@ -2,6 +2,9 @@
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// A set of services grouped by the same characteristics
+    /// </summary>
     public class Category
     {
         [Key]

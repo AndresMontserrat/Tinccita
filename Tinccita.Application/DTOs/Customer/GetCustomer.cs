@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Tinccita.Application.DTOs.AppointmentBooked;
+using Tinccita.Application.DTOs.AppointmentBookedCustomer;
 
 namespace Tinccita.Application.DTOs.Customer
 {
@@ -7,6 +7,6 @@ namespace Tinccita.Application.DTOs.Customer
     {
         [Required]
         public Guid Id { get; set; }
-        public ICollection<GetAppointmentBooked>? Appointments { get; set; }
+        public ICollection<GetAppointmentBookedCustomer>? Appointments { get; set; }
     }
 }

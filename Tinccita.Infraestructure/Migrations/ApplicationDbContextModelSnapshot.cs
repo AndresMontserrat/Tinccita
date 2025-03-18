@@ -17,21 +17,6 @@ namespace Tinccita.Infraestructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("AppointmentBookedCustomer", b =>
-                {
-                    b.Property<Guid>("AppointmentsBookedId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CustomersGuid")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("AppointmentsBookedId", "CustomersGuid");
-
-                    b.HasIndex("CustomersGuid");
-
-                    b.ToTable("AppointmentBookedCustomer");
-                });
-
             modelBuilder.Entity("Tinccita.Domain.Entities.AppointmentAvailable", b =>
                 {
                     b.Property<Guid>("Id")
@@ -44,7 +29,10 @@ namespace Tinccita.Infraestructure.Migrations
                     b.Property<Guid?>("ServiceId")
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeOnly>("Time")
+                    b.Property<TimeOnly>("Time_End")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("Time_Start")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -69,7 +57,10 @@ namespace Tinccita.Infraestructure.Migrations
                     b.Property<Guid?>("ServiceId")
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeOnly>("Time")
+                    b.Property<TimeOnly>("Time_End")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("Time_Start")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -79,13 +70,43 @@ namespace Tinccita.Infraestructure.Migrations
                     b.ToTable("AppointmentsBooked");
                 });
 
+            modelBuilder.Entity("Tinccita.Domain.Entities.AppointmentBookedCustomer", b =>
+                {
+                    b.Property<Guid>("AppointmentBookedId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CustomerGuid")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AppointmentBookedId", "CustomerGuid");
+
+                    b.HasIndex("CustomerGuid");
+
+                    b.ToTable("AppointmentsBookedCustomers");
+                });
+
             modelBuilder.Entity("Tinccita.Domain.Entities.Business", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NIF")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -118,16 +139,36 @@ namespace Tinccita.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Prefix")
+                    b.Property<string>("Postcode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname2")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Guid");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Customers");
                 });
@@ -140,6 +181,9 @@ namespace Tinccita.Infraestructure.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("Minutes")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -176,21 +220,6 @@ namespace Tinccita.Infraestructure.Migrations
                     b.ToTable("Subcategories");
                 });
 
-            modelBuilder.Entity("AppointmentBookedCustomer", b =>
-                {
-                    b.HasOne("Tinccita.Domain.Entities.AppointmentBooked", null)
-                        .WithMany()
-                        .HasForeignKey("AppointmentsBookedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tinccita.Domain.Entities.Customer", null)
-                        .WithMany()
-                        .HasForeignKey("CustomersGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Tinccita.Domain.Entities.AppointmentAvailable", b =>
                 {
                     b.HasOne("Tinccita.Domain.Entities.Service", "Service")
@@ -207,6 +236,21 @@ namespace Tinccita.Infraestructure.Migrations
                         .HasForeignKey("ServiceId");
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Tinccita.Domain.Entities.AppointmentBookedCustomer", b =>
+                {
+                    b.HasOne("Tinccita.Domain.Entities.AppointmentBooked", null)
+                        .WithMany("Customers")
+                        .HasForeignKey("AppointmentBookedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tinccita.Domain.Entities.Customer", null)
+                        .WithMany("AppointmentsBooked")
+                        .HasForeignKey("CustomerGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Tinccita.Domain.Entities.Category", b =>
@@ -236,6 +280,11 @@ namespace Tinccita.Infraestructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Tinccita.Domain.Entities.AppointmentBooked", b =>
+                {
+                    b.Navigation("Customers");
+                });
+
             modelBuilder.Entity("Tinccita.Domain.Entities.Business", b =>
                 {
                     b.Navigation("Categories");
@@ -244,6 +293,11 @@ namespace Tinccita.Infraestructure.Migrations
             modelBuilder.Entity("Tinccita.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("Tinccita.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("AppointmentsBooked");
                 });
 
             modelBuilder.Entity("Tinccita.Domain.Entities.Service", b =>

@@ -8,26 +8,32 @@ namespace Tinccita.Api.Controllers
     [ApiController]
     public class ServiceController(IServiceService serviceService) : ControllerBase
     {
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await serviceService.GetAllAsync();
-            return data.Any() ? Ok(data) : NotFound();
-        }
         [HttpGet("single/{id}")]
         public async Task<IActionResult> GetSingle(Guid id)
         {
             var data = await serviceService.GetByIdAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
+        [HttpGet("find-by-subcategory/{id}")]
+        public async Task<IActionResult> FindBySubcategory(Guid id)
+        {
+            var data = await serviceService.GetAllBySubcategoryAsync(id);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-title/{characters}")]
+        public async Task<IActionResult> FindByTitle(string characters)
+        {
+            var data = await serviceService.GetByTitleDescriptionAsync(characters);
+            return data != null ? Ok(data) : NotFound();
+        }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(CreateService service)
+        public async Task<IActionResult> Add([FromBody] CreateService service)
         {
             var result = await serviceService.AddAsync(service);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateService service)
+        public async Task<IActionResult> Update([FromBody] UpdateService service)
         {
             var result = await serviceService.UpdateAsync(service);
             return result.Success ? Ok(result) : BadRequest(result);

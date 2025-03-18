@@ -7,7 +7,6 @@ namespace Tinccita.Infraestructure.Repositories
 {
     public class GenericRepository<TEntity>(ApplicationDbContext context) : IGeneric<TEntity> where TEntity : class
     {
-        //TODO: CREATE REPOSITORY BY DOMAIN CLASS
         public async Task<int> AddAsync(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
@@ -27,11 +26,11 @@ namespace Tinccita.Infraestructure.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            var result = await context.Set<TEntity>().AsNoTracking().ToListAsync();   
+            var result = await context.Set<TEntity>().AsNoTracking().ToListAsync();
             return result;
         }
 
-        public async Task<TEntity>GetByIdAsync(Guid id)
+        public async Task<TEntity> GetByIdAsync(Guid id)
         {
             var result = await context.Set<TEntity>().FindAsync(id);
             return result!;

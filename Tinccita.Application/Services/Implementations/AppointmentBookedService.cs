@@ -7,7 +7,7 @@ using Tinccita.Domain.Interfaces;
 
 namespace Tinccita.Application.Services.Implementations
 {
-    public class AppointmentBookedService(IGeneric<AppointmentBooked> appointmentBookedInterface, IMapper mapper) : IAppointmentBookedService
+    public class AppointmentBookedService(IAppointmentBooked appointmentBookedInterface, IMapper mapper) : IAppointmentBookedService
     {
         public async Task<ServiceResponse> AddAsync(CreateAppointmentBooked appointmentBooked)
         {
@@ -30,20 +30,12 @@ namespace Tinccita.Application.Services.Implementations
             return new ServiceResponse(false, "Appointment not found");
         }
 
-        public async Task<IEnumerable<GetAppointmentBooked>> GetAllAsync()
+        public async Task<IEnumerable<GetAppointmentBooked>> GetAllByServiceAsync(Guid id)
         {
-            var rawData = await appointmentBookedInterface.GetAllAsync();
+            var rawData = await appointmentBookedInterface.GetAllByService(id);
             if (!rawData.Any()) return [];
 
             return mapper.Map<IEnumerable<GetAppointmentBooked>>(rawData);
-        }
-
-        public async Task<GetAppointmentBooked> GetByIdAsync(Guid id)
-        {
-            var rawData = await appointmentBookedInterface.GetByIdAsync(id);
-            if (rawData == null) return new GetAppointmentBooked();
-
-            return mapper.Map<GetAppointmentBooked>(rawData);
         }
 
         public async Task<ServiceResponse> UpdateAsync(UpdateAppointmentBooked appointmentBooked)

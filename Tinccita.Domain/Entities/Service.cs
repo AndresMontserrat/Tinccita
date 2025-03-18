@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tinccita.Domain.Entities
 {
+    /// <summary>
+    /// A single service provided to customer(s)
+    /// </summary>
     public class Service
     {
         [Key]
@@ -11,6 +14,7 @@ namespace Tinccita.Domain.Entities
         public string? Description { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
+        public int? Minutes { get; set; }
         public Guid? SubcategoryId { get; set; }
         public Subcategory? Subcategory { get; set; }
         public ICollection<AppointmentAvailable>? AppointmentsAvailable { get; set; }
