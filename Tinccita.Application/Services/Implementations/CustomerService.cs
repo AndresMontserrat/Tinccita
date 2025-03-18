@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Tinccita.Application.DTOs;
 using Tinccita.Application.DTOs.Customer;
+using Tinccita.Application.DTOs.Service;
 using Tinccita.Application.Services.Interfaces;
 using Tinccita.Domain.Entities;
 using Tinccita.Domain.Interfaces;
@@ -44,6 +45,23 @@ namespace Tinccita.Application.Services.Implementations
             if (rawData == null) return new GetCustomer();
 
             return mapper.Map<GetCustomer>(rawData);
+        }
+
+        public async Task<List<GetCustomer>> GetByPhoneAsync(string phone)
+        {
+            var rawData = await customerInterface.GetByPhoneAsync(phone);
+            if (rawData == null) return new List<GetCustomer>();
+
+            return mapper.Map<List<GetCustomer>>(rawData);
+        }
+
+        public async Task<List<GetCustomer>> GetByNameSurnameAsync(string characters, int? number = 3)
+        {
+            if (characters.Length < number) return new List<GetCustomer>();
+            var rawData = await customerInterface.GetByNameSurnameAsync(characters);
+            if (rawData == null) return new List<GetCustomer>();
+
+            return mapper.Map<List<GetCustomer>>(rawData);
         }
 
         public async Task<ServiceResponse> UpdateAsync(UpdateCustomer customer)

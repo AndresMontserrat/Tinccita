@@ -39,7 +39,7 @@ namespace Tinccita.Infraestructure.Repositories
             {
                 return null;
             }
-            var result = await context.Categories.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
+            var result = await context.Categories.Where(x => x.Name!.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
             return result!;
         }
         public async Task<IEnumerable<Category>> GetByBusinessAsync(Guid businessId)

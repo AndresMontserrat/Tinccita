@@ -9,6 +9,8 @@ namespace Tinccita.Application.Services.Interfaces
         Task<ServiceResponse> AddAsync(CreateBusiness business);
         Task<ServiceResponse> UpdateAsync(UpdateBusiness business);
         Task<ServiceResponse> DeleteAsync(Guid id);
-        Task<GetBusiness> GetByNameAsync(string name);
+        Task<List<GetBusiness>> GetByNameAsync(string name, int? number = 3);
+        Task<List<GetBusiness>> GetByDocument(string document);
+        Task<List<GetBusiness>> GetByEmail(string email);
     }
 }

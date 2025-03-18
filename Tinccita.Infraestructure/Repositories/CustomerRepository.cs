@@ -10,8 +10,22 @@ namespace Tinccita.Infraestructure.Repositories
     {
         public async Task<int> AddAsync(Customer entity)
         {
-            context.Set<Customer>().Add(entity);
-            return await context.SaveChangesAsync();
+            try
+            {
+                context.Set<Customer>().Add(entity);
+                return await context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                //Check if email already exist
+                var result = await context.Customers.Where(x => x.Email.ToLower().Equals(entity.Email.ToLower())).FirstOrDefaultAsync();
+                if (result != null)
+                {
+                    throw new ItemNotFoundException($"Item {typeof(Customer).Name} with {result.Email} already exists");
+                }
+                else { throw; }
+            }
+
         }
         public async Task<int> DeleteAsync(Guid id)
         {
@@ -41,6 +55,26 @@ namespace Tinccita.Infraestructure.Repositories
             }
             var result = await context.Customers.Where(x => x.Email.ToLower().Equals(email.ToLower())).FirstOrDefaultAsync();
             return result!;
+        }
+        public async Task<IEnumerable<Customer>> GetByPhoneAsync(string phone)
+        {
+            if (string.IsNullOrEmpty(phone))
+            {
+                return new List<Customer>();
+            }
+            var result = await context.Customers.Where(x => x.Phone.ToLower().Equals(phone.ToLower())).ToListAsync();
+            return result;
+        }
+        public async Task<IEnumerable<Customer>> GetByNameSurnameAsync(string characters)
+        {
+            if (string.IsNullOrEmpty(characters))
+            {
+                return new List<Customer>();
+            }
+            var result = await context.Customers
+                .Where(x => x.Name!.ToLower().StartsWith(characters.ToLower()) || x.Surname1!.StartsWith(characters.ToLower()) || x.Surname2!.StartsWith(characters.ToLower()))
+                .ToListAsync();
+            return result;
         }
     }
 }

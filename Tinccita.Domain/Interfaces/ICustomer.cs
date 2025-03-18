@@ -8,6 +8,8 @@ namespace Tinccita.Domain.Interfaces
         Task<int> DeleteAsync(Guid id);
         Task<Customer?> GetByEmailAsync(string email);
         Task<Customer?> GetByIdAsync(Guid id);
+        Task<IEnumerable<Customer>> GetByNameSurnameAsync(string characters);
+        Task<IEnumerable<Customer>> GetByPhoneAsync(string phone);
         Task<int> UpdateAsync(Customer entity);
     }
 }

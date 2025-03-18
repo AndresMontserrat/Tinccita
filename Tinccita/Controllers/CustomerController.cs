@@ -14,10 +14,22 @@ namespace Tinccita.Api.Controllers
             var data = await customerService.GetByIdAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
-        [HttpGet("find/{id}")]
+        [HttpGet("find-by-email/{email}")]
         public async Task<IActionResult> GetByEmail(string email)
         {
             var data = await customerService.GetByEmailAsync(email);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-phone/{phone}")]
+        public async Task<IActionResult> GetByPhone(string phone)
+        {
+            var data = await customerService.GetByPhoneAsync(phone);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-name/{characters}")]
+        public async Task<IActionResult> GetByName(string characters)
+        {
+            var data = await customerService.GetByNameSurnameAsync(characters);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]

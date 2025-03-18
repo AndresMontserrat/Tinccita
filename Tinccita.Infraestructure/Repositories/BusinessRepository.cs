@@ -33,13 +33,40 @@ namespace Tinccita.Infraestructure.Repositories
             var result = await context.Businesses.FindAsync(id);
             return result!;
         }
-        public async Task<Business?> GetByNameAsync(string name)
+        public async Task<IEnumerable<Business>> GetByNameAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
-                return null;
+                return new List<Business>();
             }
-            var result = await context.Businesses.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
+            var result = await context.Businesses.Where(x => x.Name!.ToLower().StartsWith(name.ToLower())).ToListAsync();
+            return result!;
+        }
+        public async Task<IEnumerable<Business>> GetByDocumentAsync(string document)
+        {
+            if (string.IsNullOrEmpty(document))
+            {
+                return new List<Business>();
+            }
+            var result = await context.Businesses.Where(x => x.NIF.ToLower().Equals(document.ToLower())).ToListAsync();
+            return result!;
+        }
+        public async Task<IEnumerable<Business>> GetByPhoneAsync(string phone)
+        {
+            if (string.IsNullOrEmpty(phone))
+            {
+                return new List<Business>();
+            }
+            var result = await context.Businesses.Where(x => x.Phone.ToLower().Equals(phone.ToLower())).ToListAsync();
+            return result!;
+        }
+        public async Task<IEnumerable<Business>> GetByEmailAsync(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return new List<Business>();
+            }
+            var result = await context.Businesses.Where(x => x.Email.ToLower().Equals(email.ToLower())).ToListAsync();
             return result!;
         }
     }

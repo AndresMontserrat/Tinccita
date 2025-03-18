@@ -49,7 +49,7 @@ namespace Tinccita.Infraestructure.Repositories
             {
                 return null;
             }
-            var result = await context.Subcategories.Where(x => x.Name.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
+            var result = await context.Subcategories.Where(x => x.Name!.ToLower().Equals(name.ToLower())).FirstOrDefaultAsync();
             return result!;
         }
 

@@ -25,6 +25,9 @@ namespace Tinccita.Infraestructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppointmentBookedCustomer>().HasKey(c => new { c.AppointmentBookedId, c.CustomerGuid });
+            modelBuilder.Entity<Customer>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }

@@ -14,10 +14,22 @@ namespace Tinccita.Api.Controllers
             var data = await businessService.GetByIdAsync(id);
             return data != null ? Ok(data) : NotFound();
         }
-        [HttpGet("find/{name}")]
-        public async Task<IActionResult> Find(string name)
+        [HttpGet("find-by-name/{name}")]
+        public async Task<IActionResult> GetByName(string name)
         {
             var data = await businessService.GetByNameAsync(name);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-doc/{document}")]
+        public async Task<IActionResult> GetByDocument(string document)
+        {
+            var data = await businessService.GetByDocument(document);
+            return data != null ? Ok(data) : NotFound();
+        }
+        [HttpGet("find-by-email/{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            var data = await businessService.GetByEmail(email);
             return data != null ? Ok(data) : NotFound();
         }
         [HttpPost("add")]

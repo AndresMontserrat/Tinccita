@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Xml.Linq;
 using Tinccita.Application.DTOs;
 using Tinccita.Application.DTOs.Business;
 using Tinccita.Application.Services.Interfaces;
@@ -36,13 +37,30 @@ namespace Tinccita.Application.Services.Implementations
 
             return mapper.Map<GetBusiness>(rawData);
         }
-        public async Task<GetBusiness> GetByNameAsync(string name)
+        public async Task<List<GetBusiness>> GetByNameAsync(string name, int? number = 3)
         {
+            if (name.Length < number) return new List<GetBusiness>();
             var rawData = await businessInterface.GetByNameAsync(name);
-            if (rawData == null) return new GetBusiness();
+            if (rawData == null) return new List<GetBusiness>();
 
-            return mapper.Map<GetBusiness>(rawData);
+            return mapper.Map<List<GetBusiness>>(rawData);
         }
+
+        public async Task<List<GetBusiness>> GetByDocument(string document)
+        {
+            var rawData = await businessInterface.GetByDocumentAsync(document);
+            if (rawData == null) return new List<GetBusiness>();
+
+            return mapper.Map<List<GetBusiness>>(rawData);
+        }
+        public async Task<List<GetBusiness>> GetByEmail(string email)
+        {
+            var rawData = await businessInterface.GetByEmailAsync(email);
+            if (rawData == null) return new List<GetBusiness>();
+
+            return mapper.Map<List<GetBusiness>>(rawData);
+        }
+
         public async Task<ServiceResponse> UpdateAsync(UpdateBusiness business)
         {
             var mappedData = mapper.Map<Business>(business);

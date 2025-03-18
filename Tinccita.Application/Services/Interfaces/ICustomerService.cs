@@ -10,5 +10,7 @@ namespace Tinccita.Application.Services.Interfaces
         Task<ServiceResponse> UpdateAsync(UpdateCustomer customer);
         Task<ServiceResponse> DeleteAsync(Guid id);
         Task<GetCustomer> GetByEmailAsync(string email);
+        Task<List<GetCustomer>> GetByPhoneAsync(string phone);
+        Task<List<GetCustomer>> GetByNameSurnameAsync(string characters, int? number = 3);
     }
 }
