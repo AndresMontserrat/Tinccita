@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita.Api", "Tinccita\Tinccita.Api.csproj", "{CE1473AC-662D-4704-904B-080903FEB534}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita.Domain", "Tinccita.Domain\Tinccita.Domain.csproj", "{19D7DE32-40CA-43C3-97E1-94B8AD304375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita.Application", "Tinccita.Application\Tinccita.Application.csproj", "{173DA461-972A-49FF-98C1-624C045BA1A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita.Infraestructure", "Tinccita.Infraestructure\Tinccita.Infraestructure.csproj", "{4B0809DB-C7CC-42B9-8522-7132DAA7656A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita-Dynamic", "Tinccita-Dynamic\Tinccita-Dynamic.csproj", "{D59E28BE-E131-4284-8EE3-FB7B81D90A20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE1473AC-662D-4704-904B-080903FEB534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE1473AC-662D-4704-904B-080903FEB534}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE1473AC-662D-4704-904B-080903FEB534}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE1473AC-662D-4704-904B-080903FEB534}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19D7DE32-40CA-43C3-97E1-94B8AD304375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19D7DE32-40CA-43C3-97E1-94B8AD304375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19D7DE32-40CA-43C3-97E1-94B8AD304375}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{4B0809DB-C7CC-42B9-8522-7132DAA7656A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B0809DB-C7CC-42B9-8522-7132DAA7656A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B0809DB-C7CC-42B9-8522-7132DAA7656A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59E28BE-E131-4284-8EE3-FB7B81D90A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59E28BE-E131-4284-8EE3-FB7B81D90A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59E28BE-E131-4284-8EE3-FB7B81D90A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59E28BE-E131-4284-8EE3-FB7B81D90A20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
