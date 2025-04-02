@@ -56,3 +56,11 @@ Este repositorio sigue una arquitectura CLEAN con dos WebAPIs separadas para man
 │   ├── 📜 webdeploy-backend-dynamic.ps1  # Despliega Tinccita-Dynamic en IIS
 │   ├── 📜 webdeploy-frontend-ssg.ps1     # Copia `dist/` a IIS | Lanzado automáticamente mediante webhook
 │   └── 📜 webdeploy-frontend-dynamic.ps1 # Despliega Vue.js dinámico en IIS
+│
+├── 📂 .github             # Carpeta para GitHub Actions y otros workflows
+│   ├── workflows/
+│   │   ├── build.yml      # Ejemplo de workflow para CI/CD
+│
+├── .gitignore             # Archivos y directorios que Git debe ignorar
+├── .gitattributes         # Configuración específica de atributos de archivos en Git
+└── README.md              # Documentación del proyecto
