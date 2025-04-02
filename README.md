@@ -6,28 +6,42 @@ Este repositorio sigue una arquitectura CLEAN con una estructura híbrida en el 
 
 - Backend:
   - TargetFramework: 8.0.
-  - Arquitectura CLEAN, con bibliotecas de clases que sirven tanto a un MVC como a un WebAPI:
-    - MVC: Proyecto ASP.NET Core Web App (Model-View-Controller) que sirve vistas RAZOR, en las cuales se integran componentes de Vue.js compilados desde el frontend.
-    - WebAPI: Proyecto ASP.NET Core Web API, diseñado para manejar cambios de estado y proporcionar endpoints consumidos por el frontend. 
-
+  - Arquitectura CLEAN: Se divide en bibliotecas de clases que sirven tanto para un MVC como un WebAPI:
+    - MVC:
+      - Proyecto ASP.NET Core Web App (Model-View-Controller).
+      - Sirve vistas RAZOR que incluyen componentes de Vue.js compilados desde el frontend.
+      - Utiliza Bootstrap 5 para el diseño de las vistas y Vue.js para agregar interactividad a los elementos dinámicos en las vistas.
+    - WebAPI:
+      - Proyecto ASP.NET Core Web API.
+      - Maneja cambios de estado y proporciona endpoints para ser consumidos por el frontend.
+      - Utiliza Axios o fetch para interactuar con los datos a través de las APIs.
 - Frontend:
-    - Implementado con Vue.js 3, utilizando Vite como herramienta de compilación y empaquetado.
-    - Integración con MVC:
-       - Vue.js se compila con Vite/Webpack y los archivos resultantes (.js, .css) se copian en wwwroot/js/ dentro del proyecto MVC.
-       - Las vistas RAZOR (.cshtml) cargan estos scripts para manejar la interactividad en los formularios y otros elementos dinámicos.
-      - Para flujos que requieren alta interactividad sin recargar la página, se comunica con el WebAPI del backend mediante llamadas fetch o Axios.
-
-- Deploy: 
-    - Backend (MVC + WebAPI): Se despliega en IIS utilizando Web Deploy.
-    - Frontend:
-      - Se compila con Vite/Webpack (npm run build).
-      - Los archivos resultantes (.js, .css) se copian en wwwroot/js/ dentro del proyecto MVC antes del despliegue.
+  - Hecho con Vue.js 3 para manejar la interactividad.
+  - Vite como herramienta de compilación y empaquetado.
+  - Integración con MVC:
+    - Los archivos generados por Vite/Webpack (principalmente .js y .css) se copian en el directorio wwwroot/js/ dentro del proyecto MVC.
+    - Las vistas RAZOR (.cshtml) cargan estos archivos y permiten manejar la interactividad en formularios y otros elementos dinámicos de la página.
+    - Para flujos altamente interactivos sin recargar la página, se comunica con el WebAPI del backend mediante llamadas fetch o Axios.
+- Presentación (MVC y Vue.js 3): 
+  - Librerías:
+    - Bootstrap 5: Para el diseño de las vistas y componentes básicos.
+    - BootstrapVueNext: Componentes prediseñados con BootstrapVueNext para Vue.js 3, utilizados para facilitar la construcción de componentes reactivos como formularios.
+  - CSS y SCSS:
+    - El archivo SCSS se usa para sobreescribir y personalizar las variables de Bootstrap 5 y otros estilos globales.
 
 4️⃣ Ejemplo de flujo:
 
 1. Backend (MVC) genera la vista que contiene elementos estáticos (HTML, Razor).
 2. Vue.js es incluido en el archivo de la vista mediante un archivo compilado con tecnología Vite/Webpack y servido desde el wwwroot del backend.
 3. Vue.js se encarga de manejar la interactividad en los elementos dentro de la vista; para así tener formularios dinámicos, validaciones y llamadas al Backend (Dynamic).
+
+🔄 Flujo de Despliegue:
+
+- Frontend:
+  - Ejecuta npm run build o vite build para compilar el frontend.
+  - Los archivos resultantes se copian en la carpeta wwwroot/js/ de la aplicación MVC.
+- Backend:
+  - Se configura y despliega en IIS utilizando Web Deploy.
 
 🚀 Ventajas:
 - Carga inicial rápida gracias a HTML estático renderizado por MVC.
@@ -71,17 +85,13 @@ Este repositorio sigue una arquitectura CLEAN con una estructura híbrida en el 
 │   │   │   │── 📂 Repositories         # Operaciones CRUD para API dinámica
 │   │   │
 │   │   │── 📂 ExternalServices        # Integración con APIs externas y WebServices SOAP
-│   │   │   │── 📂 RestClients         # Clientes para APIs REST
-│   │   │   │   │── IExternalApiService.cs  # Interfaz del servicio REST
-│   │   │   │   │── ExternalApiService.cs   # Implementación del servicio REST
-│   │   │   │
-│   │   │   │── 📂 SoapClients         # Clientes para WebServices SOAP
-│   │   │       │── IExternalSoapService.cs  # Interfaz del servicio SOAP
-│   │   │       │── ExternalSoapService.cs   # Implementación del servicio SOAP
-│   │   │
-│   │   │── 📂 Shared                  # Clases comunes reutilizables
-│   │       │── Helpers.cs             # Métodos auxiliares y utilidades
-│   │       │── Constants.cs           # Definición de constantes globales
+│   │       │── 📂 RestClients         # Clientes para APIs REST
+│   │       │   │── IExternalApiService.cs  # Interfaz del servicio REST
+│   │       │   │── ExternalApiService.cs   # Implementación del servicio REST
+│   │       │
+│   │       │── 📂 SoapClients         # Clientes para WebServices SOAP
+│   │          │── IExternalSoapService.cs  # Interfaz del servicio SOAP
+│   │          │── ExternalSoapService.cs   # Implementación del servicio SOAP
 │   │
 │   ├── 📂 Tinccita.Shared     # Código compartido (helpers, constantes, etc.)
 │       ├── Helpers.cs         # Métodos utilitarios
@@ -96,11 +106,6 @@ Este repositorio sigue una arquitectura CLEAN con una estructura híbrida en el 
 │   │   ├── router/            # Rutas Vue Router (si necesario)
 │   │   └── main.ts            # Punto de entrada de Vue.js
 │   ├── dist/                  # Archivos compilados (build) de Vue.js
-|
-├── 📂 deploy             # Scripts para Despliegue en IIS
-│   ├── webdeploy-backend-dynamic.ps1  # Despliega Tinccita-Dynamic en IIS
-│   ├── webdeploy-backend-mvc.ps1      # Despliega Tinccita-MVC en IIS
-│   └── webdeploy-frontend-dynamic.ps1 # Despliega Vue.js dinámico en IIS
 │
 ├── 📂 .github             # Carpeta para GitHub Actions y otros workflows
 │   ├── workflows/

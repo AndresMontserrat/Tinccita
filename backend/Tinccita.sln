@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita-Dynamic", "Tinccit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita-MVC", "Tinccita-MVC\Tinccita-MVC.csproj", "{75B996D8-7604-4776-B2B2-F1C67833F972}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinccita.Shared", "Tinccita.Shared\Tinccita.Shared.csproj", "{B2FB37CB-A6F9-4C57-A7EA-2EA6B5C0E456}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{75B996D8-7604-4776-B2B2-F1C67833F972}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75B996D8-7604-4776-B2B2-F1C67833F972}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75B996D8-7604-4776-B2B2-F1C67833F972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2FB37CB-A6F9-4C57-A7EA-2EA6B5C0E456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FB37CB-A6F9-4C57-A7EA-2EA6B5C0E456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FB37CB-A6F9-4C57-A7EA-2EA6B5C0E456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FB37CB-A6F9-4C57-A7EA-2EA6B5C0E456}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
