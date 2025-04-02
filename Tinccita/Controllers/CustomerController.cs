@@ -35,12 +35,32 @@ namespace Tinccita.Api.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] CreateCustomer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(ms => ms.Value!.Errors.Count > 0) 
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value!.Errors.Select(e => e.ErrorMessage).ToList()
+                    );
+                return BadRequest(new { Message = "Validation failed", Errors = errors });
+            }
             var result = await customerService.AddAsync(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateCustomer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(ms => ms.Value!.Errors.Count > 0)
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value!.Errors.Select(e => e.ErrorMessage).ToList()
+                    );
+                return BadRequest(new { Message = "Validation failed", Errors = errors });
+            }
             var result = await customerService.UpdateAsync(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
